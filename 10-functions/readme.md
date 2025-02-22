@@ -1,4 +1,4 @@
-# Using Functions in Workflows
+# 👉 Using Functions in Workflows 👈
 
 GitHub Actions offers a set of built-in functions that you can use in expressions. These functions allow you to perform various operations, including comparisons, string manipulations, and data transformations.
 
