@@ -1,0 +1,15 @@
+name: 05 - 2 -  event filter and activity type
+
+on:
+    pull_request:
+        types:
+            - closed
+        branches:
+            - main
+    #  this is override default behaviour
+
+jobs:
+    echo:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Running whenever a PR is opened or synchronized AND base branch is main"
