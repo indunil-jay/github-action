@@ -2,10 +2,10 @@ name: 02 - workflow events
 
 on:
     workflow_dispatch:
-    schedule:
-        - cron: "*/5 * * * *"
-        # every 5 min trigger this event
-        # try google for generate cron expression generator
+    # schedule:
+    #     - cron: "*/5 * * * *"
+    # every 5 min trigger this event
+    # try google for generate cron expression generator
 
     # push:
     # pull_request:
