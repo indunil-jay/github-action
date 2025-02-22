@@ -43,6 +43,8 @@ jobs:
               run: echo 'Running e2e Test...'
     load-tests:
         runs-on: ubuntu-latest
+        continue-on-error: true
+        # this key value pair does, this step is success event if there is error exits.then workflow does not failed due to this step
         needs:
             - deploy-nonprod
         steps:
