@@ -20,6 +20,9 @@ jobs:
               run: |
                   echo "I am building step"
                   echo "status=${{inputs.build-status}}" >> "$GITHUB_OUTPUT"
+                  echo "output1=hello" >> "$GITHUB_OUTPUT"
+                  echo "output2=world" >> "$GITHUB_OUTPUT"
+                  cat "$GITHUB_OUTPUT"
 
     deploy:
         runs-on: ubuntu-latest
