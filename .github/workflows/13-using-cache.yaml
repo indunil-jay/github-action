@@ -80,7 +80,7 @@ jobs:
               run: npm run test
 
             - name: Building
-              run: npm run buil
+              run: npm run build
             # 5. deploy to a non prod
             - name: Deploying to non-prod
               run: echo "Deploying to non prod"
