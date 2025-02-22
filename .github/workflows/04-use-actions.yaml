@@ -1,0 +1,35 @@
+name: 04 - use action
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            # we have to set app directory manually multiple places below, intead
+            # we can define on job level property, like below.cancel-timeout-minutes:
+            # meaning that when event run command is running it run on specif directory
+            run:
+                working-directory: 05-actions/react-app
+
+        steps:
+            # 1. checkout the code from the repository
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: Printing Folders
+              run: ls
+            # 2. install dependecies of our react app
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "22.x"
+
+            - name: Install dependecies
+              run: npm  ci
+            #   working-directory: 05-actions/react-app
+            # 3. execute automated test
+            - name: Unit test
+              run: npm run test
+            #   working-directory: 05-actions/react-app
