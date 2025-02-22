@@ -1,0 +1,45 @@
+# What is YAML?
+# YAML (YAML Ain't Markup Language) is a human-readable data serialization format that's commonly used for configuration files and data exchange between languages with different data structures. It's designed to be easy to read and write, making it popular for configuration files in many programming and infrastructure management tools.
+
+# Key Features:
+
+#     Human-Readable: It uses indentation to define structure, similar to Python.
+#     Data Types: Supports scalars (strings, numbers, booleans), sequences (lists), and mappings (dictionaries or objects).
+#     Comments: Lines starting with # are comments.
+#     File Extension: .yaml or .yml.
+
+# Common Use Cases:
+
+#     Configuration files (e.g., Docker Compose, GitHub Actions, Kubernetes manifests)
+#     Data serialization for data exchange between systems
+#     Defining infrastructure as code (IaC)
+
+# Primitive
+name: "some name" # string
+age: 25 # number
+isWorking: true # boolean
+
+# objects / dictionaries
+
+server:
+    host: localhost
+    port: 8080
+
+# arrays /list
+
+features:
+    - authentication
+    - logging
+    - monitoring
+
+# arrays of objects/ dictionaries
+colors:
+    - name: red
+      hex: #f00
+      labels:
+          - experimental
+          - accessiblity
+    - name: green
+      hex: #0f0
+    - name: blue
+      hex: #00f
