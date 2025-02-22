@@ -1,7 +1,14 @@
 name: 02 - workflow events
 
 on:
-    push:
+    workflow_dispatch:
+    schedule:
+        - cron: "*/5 * * * *"
+        # every 5 min trigger this event
+        # try google for generate cron expression generator
+
+    # push:
+    # pull_request:
 
 jobs:
     echo:
@@ -9,4 +16,4 @@ jobs:
         steps:
             - name: Show the trigger
               run: |
-                  echo "I have  been triggered by a(n) ${{github.event_name}}"
+                  echo "I have  been triggered by a(n) ${{github.event_name}} event."
