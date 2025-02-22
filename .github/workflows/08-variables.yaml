@@ -19,3 +19,18 @@ jobs:
                   echo "step env var  : ${{env.STEP_VAR}}"
                   echo "step env var  : ${{env.JOB_VAR}}"
                   echo "step env var  : ${{env.WORKFLOW_VAR}}"
+    echo-2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print  variables
+              run: |
+                  echo "Environment variables  : ${{vars.ENV_VAR}}"
+                  echo "Repository variables  : ${{vars.REPOSITORY_VAR}}"
+    echo-prod:
+        runs-on: ubuntu-latest
+        environment: prod
+        steps:
+            - name: Print  variables
+              run: |
+                  echo "Environment variables  : ${{vars.ENV_VAR}}"
+                  echo "Repository variables  : ${{vars.REPOSITORY_VAR}}"
