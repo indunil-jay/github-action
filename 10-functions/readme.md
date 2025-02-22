@@ -25,6 +25,9 @@ For a full list of available functions, check GitHub Actions's [functions page](
 
 These functions are used in if conditionals to determine the success or failure of previous steps or jobs.
 
+
+add new line
+
 -   `success()`: returns `true` when none of the previous steps have failed or been canceled.
 -   `failure()`: returns `true` when any previous step of a job fails.
 -   `cancelled()`: returns `true` if the workflow was canceled.
