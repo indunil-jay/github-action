@@ -19,6 +19,8 @@ jobs:
                   echo "step env var  : ${{env.STEP_VAR}}"
                   echo "step env var  : ${{env.JOB_VAR}}"
                   echo "step env var  : ${{env.WORKFLOW_VAR}}"
+
+              #     echo "Environment variables  : ${{vars.ENV_VAR}}" this line is not print anything becuse we havent defined the enviroment varible keyword in step,
     echo-2:
         runs-on: ubuntu-latest
         steps:
