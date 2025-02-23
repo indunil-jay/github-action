@@ -1,4 +1,4 @@
-name: 17 - 2 - custom action | Docker
+name: 17 - 3 - custom action | Docker
 
 on:
     workflow_dispatch:
