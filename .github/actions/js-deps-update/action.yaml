@@ -23,6 +23,11 @@ inputs:
     debug:
         description: whether the output debug message to the console
         default: "false"
+
+outputs:
+    updates-available:
+        description: Whether there are updates available
+
 runs:
     using: node20
     main: index.js

@@ -70,7 +70,11 @@ async function run() {
         { cwd: workingDirectory }
     );
 
+    let updateAvailable = false;
+
     if (gitStatus.stdout.length > 0) {
+        updateAvailable = true;
+        core.setOutput("updates-available", updateAvailable);
         core.info(`[js-dependency-update] :: There are updates available!`);
         //4.1
         await exec.exec(`git config --global user.name "gh-automation"`);
@@ -115,6 +119,7 @@ async function run() {
             `[js-dependency-update] :: No updates at this point in time!`
         );
     }
+    core.info(`Setting updates-available output to ${updateAvailable}`);
 }
 run();
 
