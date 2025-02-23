@@ -8,11 +8,20 @@ jobs:
         runs-on: ${{ matrix.os }}
         name: ${{matrix.os}}-${{matrix.node-version}}
         strategy:
+            # default is true, if any failed other will be interrupted, if it is false, if one failed, other will be continue
+            fail-fast: false
             matrix:
                 node-version: [18.x, 20.x, 22.x]
                 os:
                     - ubuntu-latest
                     - windows-latest
+
+                # allow to extends the configuration
+                # this set only mentioned combination
+                include:
+                    - os: ubuntu-latest
+                      node-version: 23.x
+                      tag: experimental
         steps:
             - name: Setup Node
               uses: actions/setup-node@v3
@@ -21,3 +30,12 @@ jobs:
 
             - name: Perform some  test
               run: echo "Running tests on OS ${{matrix.os}} and nodejs ${{matrix.node-version}}"
+
+            - name: Fail if experimental
+              if: matrix.tag == 'experimental'
+              run: exit 1
+
+            - name: Perform some test
+              run: echo "Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node-version}}"
+# NOTE:
+# 1. in  a matrics execution flow one of  jobs is failure, all other  jobs also  be cancalled (skipped) fail fast strategy.
