@@ -52,6 +52,8 @@ jobs:
                     # 1. include does not override, any existing key : value that provided in matrix
                     - color: red
                       shape: tringle
+                exclude:
+                    - shape: square
         steps:
             - name: Print variantion
               run: echo "${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}"
