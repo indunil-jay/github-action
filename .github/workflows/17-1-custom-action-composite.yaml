@@ -25,10 +25,15 @@ jobs:
             #  above line is required to run custom action which we  have created in  /.github/actions/composite-cache-deps
             - name: Setup Node and NPM Dependencies
               uses: ./.github/actions/composite-cache-deps
+              id: setup-deps
               with:
                   node-version: 22.x
                   working-dir: ${{env.working-directory}}
                   target-env: ${{inputs.target-env}}
+
+            - name: Print Output
+              run: |
+                  echo "installed dependencies  :: ${{steps.setup-deps.outputs.installed-deps}}"
 
             - name: Test
               run: npm  run test
