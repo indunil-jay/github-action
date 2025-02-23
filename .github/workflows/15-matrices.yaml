@@ -50,5 +50,8 @@ jobs:
                     # 1. include does not override, any value that provided in matrix
                     - color: red
                     - shape: tringle
+        steps:
+            - name: Print variantion
+              run: echo " ${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}"
 # NOTE:
 # 1. in  a matrics execution flow one of  jobs is failure, all other  jobs also  be cancalled (skipped) fail fast strategy.
