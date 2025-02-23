@@ -15,6 +15,14 @@ inputs:
         default: dev
         required: false
 
+outputs:
+    installed-deps:
+        description: "wheather dependenu were installed or not"
+        value: ${{ steps.cache-key.outputs.cache-hit!='true'}}
+    random-output:
+        description: some value
+        value: ${{step.random.outputs.random}}
+
 runs:
     using: composite
     steps:
@@ -41,3 +49,7 @@ runs:
         #   run: npm ci --omit=dev
         #   shell: bash
         #   working-directory: ${{inputs.working-dir}}
+        - name: Random output
+          id: random
+          shell: bash
+          run: echo "random=123" >> $GITHUB_OUTPUT
