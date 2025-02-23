@@ -1,5 +1,6 @@
 const core = require("@actions/core");
 const exec = require("@actions/exec");
+const github = require("@actions/github");
 
 const validateBranchName = ({ branchName }) =>
     /^[a-zA-Z0-9_\-\.\/]+$/.test(branchName);
@@ -24,10 +25,12 @@ async function run() {
      */
 
     //1
-    const baseBranch = core.getInput("base-branch");
-    const targetBranch = core.getInput("target-branch");
-    const githubToken = core.getInput("github-token");
-    const workingDirectory = core.getInput("working-directory");
+    const baseBranch = core.getInput("base-branch", { required: true });
+    const targetBranch = core.getInput("target-branch", { required: true });
+    const githubToken = core.getInput("github-token", { required: true });
+    const workingDirectory = core.getInput("working-directory", {
+        required: true,
+    });
     const debug = core.getBooleanInput("debug");
 
     core.setSecret(githubToken);
@@ -69,13 +72,49 @@ async function run() {
 
     if (gitStatus.stdout.length > 0) {
         core.info(`[js-dependency-update] :: There are updates available!`);
+        //4.1
+        await exec.exec(`git config --global user.name "gh-automation"`);
+        await exec.exec(
+            `git config --global user.email "gh-automation@email.com"`
+        );
+        await exec.exec(`git checkout -b ${targetBranch} `, [], {
+            cwd: workingDirectory,
+        });
+        await exec.exec(`git add package.json package-lock.json `, [], {
+            cwd: workingDirectory,
+        });
+
+        await exec.exec(`git commit -m "chore:update dependencies`, [], {
+            cwd: workingDirectory,
+        });
+
+        await exec.exec(`git push -u origin ${targetBranch} --force`, [], {
+            cwd: workingDirectory,
+        });
+        //4.2
+        const octokit = github.getOctokit(githubToken);
+        try {
+            await octokit.rest.pulls.create({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                title: `Update NPM dependencies`,
+                body: `This pull request updates NPM packages`,
+                base: baseBranch,
+                head: targetBranch,
+            });
+        } catch (error) {
+            core.warning(
+                `[js-dependency-update] :: somthing went wrong while creating the PR. checks logs below.`
+            );
+            core.error(`${error}`);
+            core.setFailed(error.message);
+        }
     } else {
+        //5
         core.info(
             `[js-dependency-update] :: No updates at this point in time!`
         );
     }
-
-    // 4
 }
 run();
 
