@@ -24,8 +24,13 @@ jobs:
             - uses: actions/checkout@v4
             - name: Check for dependency updates
               uses: ./.github/actions/js-deps-update
+              id: update-deps
               with:
                   base-branch: ${{inputs.base-branch}}
                   target-branch: ${{inputs.target-branch}}
                   working-directory: ${{inputs.working-directory}}
                   github-token: ${{secrets.GITHUB_TOKEN}}
+
+            - name: Print custom action output
+              run: |
+                  echo "Update available : ${{steps.update-deps.outputs.updates-available}}"
