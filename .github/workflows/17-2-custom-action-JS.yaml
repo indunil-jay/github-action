@@ -1,0 +1,12 @@
+name: 17 - 2 - custom action | Action
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Check for dependency updates
+              uses: ./.github/actions/js-deps-update
