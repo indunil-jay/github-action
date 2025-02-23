@@ -31,9 +31,9 @@ jobs:
             - name: Perform some  test
               run: echo "Running tests on OS ${{matrix.os}} and nodejs ${{matrix.node-version}}"
 
-            - name: Fail if experimental
-              if: matrix.tag == 'experimental'
-              run: exit 1
+            # - name: Fail if experimental
+            #   if: matrix.tag == 'experimental'
+            #   run: exit 1
 
             - name: Perform some test
               run: echo "Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node-version}}"
@@ -53,6 +53,7 @@ jobs:
                     - color: red
                       shape: tringle
                 exclude:
+                    # 3. remvoe any property from final matrix
                     - shape: square
         steps:
             - name: Print variantion
