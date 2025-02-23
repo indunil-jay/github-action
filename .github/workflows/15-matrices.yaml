@@ -40,7 +40,7 @@ jobs:
 
     include-example:
         runs-on: ubuntu-latest
-        name: ${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}
+        name: ${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}
         strategy:
             matrix:
                 color: [red, green]
@@ -50,8 +50,10 @@ jobs:
                     # 1. include does not override, any value that provided in matrix
                     - color: red
                     - shape: tringle
+                    # 2. But if we and completly new property it will be added every possible entry
+                    - opacity: 50
         steps:
             - name: Print variantion
-              run: echo " ${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}"
+              run: echo "${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}"
 # NOTE:
 # 1. in  a matrics execution flow one of  jobs is failure, all other  jobs also  be cancalled (skipped) fail fast strategy.
