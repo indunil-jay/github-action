@@ -47,11 +47,11 @@ jobs:
                 shape: [circle, square]
                 size: [small, large]
                 include:
-                    # 1. include does not override, any value that provided in matrix
+                    # 1. include does not override, any existing key : value that provided in matrix
                     - color: red
-                    - shape: tringle
                     # 2. But if we and completly new property it will be added every possible entry
                     - opacity: 50
+                      shape: tringle
         steps:
             - name: Print variantion
               run: echo "${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}"
