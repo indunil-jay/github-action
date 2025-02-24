@@ -1,0 +1,33 @@
+name: 20 - 2 - managing concurrency
+
+on:
+    workflow_dispatch:
+
+jobs:
+    ping-with-concurrency:
+        concurrency:
+            group: ${{github.workflow}}-${{github.ref}}
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+            - name: Ping URL
+              id: ping-url
+              uses: ./.github/actions/docker-ping-url
+              with:
+                  url: https://www.google.com
+                  max_trials: 20
+                  delay: 10
+
+    ping-without-concurrency:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+            - name: Ping URL
+              id: ping-url
+              uses: ./.github/actions/docker-ping-url
+              with:
+                  url: https://www.google.com
+                  max_trials: 20
+                  delay: 10
