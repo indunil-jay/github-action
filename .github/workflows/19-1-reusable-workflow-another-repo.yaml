@@ -19,3 +19,6 @@ jobs:
     e2e-test:
         # uses: <owner>/<repo>/.github/workflows/<workflow_name>@version
         uses: indunil-jay/github-course-repo/.github/workflows/e2e.yaml@main
+        needs: deploy
+        secrets:
+            access-token: ${{ secrets.GH_TOKEN }}
