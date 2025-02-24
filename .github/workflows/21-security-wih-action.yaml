@@ -1,4 +1,4 @@
-name: 21 - workflow security
+name: 21 - workflow security with action
 
 on:
     pull_request:
